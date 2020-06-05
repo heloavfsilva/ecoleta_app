@@ -5,7 +5,7 @@ class PointsController {
     async create(req: Request, res: Response) {
         const {
             name,
-            //email,
+            email,
             whatsapp,
             latitude,
             longitude,
@@ -17,9 +17,9 @@ class PointsController {
         const trx = await knex.transaction();
         
         const point = {
-            image: 'image-fake',
+            image: 'https://images.unsplash.com/photo-1572095755818-8fd546d228a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=276&q=60',
             name,
-            //email,
+            email,
             whatsapp,
             latitude,
             longitude,
