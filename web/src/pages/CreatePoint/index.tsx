@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi'
 import { Map, TileLayer, Marker } from 'react-leaflet';
+import api from '../../services/api';
 import './styles.css'
 import logo from '../../assets/logo.svg';
 
+interface Item{
+    id: number;
+    title: string;
+    image_url: string;
+}
+
 const CreatePoint = () => {
+    const [items, setItems] = useState<Item[]>([]);
+
+    useEffect(() => {
+        api.get('items').then(res => {
+            setItems(res.data);
+        })
+    }, [] );
+
     return (
         <div id="page-create-point">
             <header>
@@ -98,24 +113,16 @@ const CreatePoint = () => {
                         <span>Selecione um ou mais itens de coleta</span>
                     </legend>
                     <ul className="items-grid">
-                        <li>
-                            <img src="http://localhost:3333/uploads/lampadas.svg" alt="Lampadas"/>
-                        </li>
-                        <li>
-                            <img src="http://localhost:3333/uploads/baterias.svg" alt="Baterias"/>
-                        </li>
-                        <li>
-                            <img src="http://localhost:3333/uploads/papeis-papelao.svg" alt="Papeis e Papelao"/>
-                        </li>
-                        <li>
-                            <img src="http://localhost:3333/uploads/eletronicos.svg" alt="Eletronico"/>
-                        </li>
-                        <li>
-                            <img src="http://localhost:3333/uploads/organicos.svg" alt="Organicos"/>
-                        </li>
-                        <li>
-                            <img src="http://localhost:3333/uploads/oleo.svg" alt="Oleo"/>
-                        </li>
+                        { items.map(item => (
+                            
+                            <li key={item.id}>
+                                <img src={item.image_url} alt={item.title}/>
+                                <span>{item.title}</span>
+                            </li>
+                               
+                        ))}
+
+                       
                     </ul>
                 </fieldset>
 
