@@ -42,15 +42,14 @@ const CreatePoint = () => {
 
     const history = useHistory();
 
-    /*useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-            pos => {
-                const { latitude, longitude } = pos.coords;
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function(position){
+                const { latitude, longitude } = position.coords;
                 setInitialPosition([latitude, longitude]);
                 console.log([latitude, longitude]);
             });
 
-    }, []);*/
+    }, []);
 
     useEffect(() => {
         api.get('items').then(res => {
@@ -196,14 +195,14 @@ const CreatePoint = () => {
                         </h2>
                         <span>Selecione o endereço de coleta</span>
                     </legend>
-
-                    <Map center={[-23.2419526,-45.8930779]} zoom={15} onClick={handleMapClik}>
+                    
+                    <Map center={initialPosition} zoom={14} onClick={handleMapClik}>
                         <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
 
-                        <Marker position={selectedPosition} zoom={15} />
+                        <Marker position={selectedPosition} zoom={14} />
                     </Map>
 
                     <div className="field-group">
