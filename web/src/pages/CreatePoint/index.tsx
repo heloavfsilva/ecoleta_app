@@ -71,8 +71,7 @@ const CreatePoint = () => {
         }
 
         axios
-        .get<IBGECityRes[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/mesorregioes`)
-            //`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+        .get<IBGECityRes[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
         .then(
             res => {
                 const cityNames = res.data.map(city => city.nome);

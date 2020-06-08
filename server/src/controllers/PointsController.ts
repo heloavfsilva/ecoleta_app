@@ -80,8 +80,6 @@ class PointsController {
         .distinct()
         .select('points.*');
 
-        console.log(city,uf,items);
-
         return res.json(points);
     }
 }
